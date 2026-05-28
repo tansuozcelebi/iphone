@@ -1,0 +1,12 @@
+{
+  "name": "iphone-feature-audit",
+  "version": "1.0.0",
+  "private": true,
+  "description": "iPhone ozellik ve izin denetimi web uygulamasi",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
