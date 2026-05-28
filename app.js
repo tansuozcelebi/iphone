@@ -68,6 +68,7 @@ function pickFiles(accept, multiple) {
 
 let cameraStream = null;
 let micStream = null;
+let motionHandlers = null;
 
 const FEATURES = [
   {
@@ -264,18 +265,20 @@ const FEATURES = [
     question: "Hareket sensörlerinizi okuyabilir miyim?",
     btn: "Sensörü aç",
     async run(el) {
-      if (typeof DeviceMotionEvent === "undefined") return "unsupported";
-      if (typeof DeviceMotionEvent.requestPermission === "function") {
-        let res;
+      const hasMotion = typeof DeviceMotionEvent !== "undefined";
+      const hasOrient = typeof DeviceOrientationEvent !== "undefined";
+      if (!hasMotion && !hasOrient) return "unsupported";
+
+      if (hasMotion && typeof DeviceMotionEvent.requestPermission === "function") {
         try {
-          res = await DeviceMotionEvent.requestPermission();
+          if ((await DeviceMotionEvent.requestPermission()) !== "granted")
+            return "denied";
         } catch (e) {
           return "denied";
         }
-        if (res !== "granted") return "denied";
       }
       if (
-        typeof DeviceOrientationEvent !== "undefined" &&
+        hasOrient &&
         typeof DeviceOrientationEvent.requestPermission === "function"
       ) {
         try {
@@ -284,17 +287,82 @@ const FEATURES = [
           /* yön izni isteğe bağlı */
         }
       }
-      clear(el);
-      const out = document.createElement("pre");
-      out.textContent = "Cihazı hareket ettirin…";
-      el.appendChild(out);
-      window.addEventListener("devicemotion", (ev) => {
-        const a = ev.accelerationIncludingGravity || ev.acceleration || {};
-        out.textContent =
-          `x: ${(a.x || 0).toFixed(2)}\n` +
-          `y: ${(a.y || 0).toFixed(2)}\n` +
-          `z: ${(a.z || 0).toFixed(2)}`;
-      });
+
+      // Önceki dinleyicileri kaldır (tekrar açılırsa)
+      if (motionHandlers) {
+        window.removeEventListener("deviceorientation", motionHandlers.orient);
+        window.removeEventListener("devicemotion", motionHandlers.motion);
+        motionHandlers = null;
+      }
+
+      el.innerHTML = `
+        <div class="motion-detail">
+          <div class="scene">
+            <div class="phone3d">
+              <div class="face front"><div class="notch"></div><div class="screen"></div></div>
+              <div class="face back"><div class="cam"></div></div>
+              <div class="face left"></div>
+              <div class="face right"></div>
+              <div class="face top"></div>
+              <div class="face bottom"></div>
+            </div>
+          </div>
+          <div class="motion-readout">
+            <div class="gmeter-circle">
+              <span class="ring"></span>
+              <span class="cross-h"></span>
+              <span class="cross-v"></span>
+              <span class="dot"></span>
+            </div>
+            <div class="gmeter-num"><strong class="g-now">0.00</strong> G
+              <span class="gmeter-peak">tepe: <span class="g-peak">0.00</span> G</span>
+            </div>
+            <pre class="orient-vals">Cihazı hareket ettirin…</pre>
+          </div>
+        </div>`;
+
+      const phone = el.querySelector(".phone3d");
+      const dot = el.querySelector(".dot");
+      const gNow = el.querySelector(".g-now");
+      const gPeak = el.querySelector(".g-peak");
+      const orientOut = el.querySelector(".orient-vals");
+      let peak = 0;
+
+      // Jiroskop/yönelim → 3B telefonu döndür (yaklaşık)
+      const orient = (ev) => {
+        const a = ev.alpha || 0;
+        const b = ev.beta || 0;
+        const g = ev.gamma || 0;
+        phone.style.transform = `rotateX(${b}deg) rotateY(${g}deg) rotateZ(${-a}deg)`;
+        orientOut.textContent = `α ${a.toFixed(0)}°   β ${b.toFixed(
+          0
+        )}°   γ ${g.toFixed(0)}°`;
+      };
+
+      // İvmeölçer → G-metre
+      const clamp = (v) => Math.max(-1, Math.min(1, v / 1.5));
+      const motion = (ev) => {
+        const acc =
+          ev.acceleration && ev.acceleration.x !== null
+            ? ev.acceleration
+            : ev.accelerationIncludingGravity;
+        if (!acc) return;
+        const gx = (acc.x || 0) / 9.81;
+        const gy = (acc.y || 0) / 9.81;
+        const gz = (acc.z || 0) / 9.81;
+        const mag = Math.sqrt(gx * gx + gy * gy + gz * gz);
+        gNow.textContent = mag.toFixed(2);
+        if (mag > peak) {
+          peak = mag;
+          gPeak.textContent = peak.toFixed(2);
+        }
+        dot.style.left = 50 + clamp(gx) * 42 + "%";
+        dot.style.top = 50 - clamp(gy) * 42 + "%";
+      };
+
+      window.addEventListener("deviceorientation", orient);
+      window.addEventListener("devicemotion", motion);
+      motionHandlers = { orient, motion };
       return "granted";
     },
   },
