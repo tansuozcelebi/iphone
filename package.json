@@ -1,8 +1,8 @@
 {
-  "name": "iphone-feature-audit",
+  "name": "tcsreal-minesweeper",
   "version": "1.0.0",
   "private": true,
-  "description": "iPhone ozellik ve izin denetimi web uygulamasi",
+  "description": "TCS Real Mayin Tarlasi - modern, videolu Minesweeper web uygulamasi",
   "scripts": {
     "start": "node server.js"
   },

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#000000" />
+  <title>iPhone Özellik & İzin Denetimi</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <p style="margin:0 0 10px"><a href="index.html" style="color:#6c8cff;text-decoration:none;font-weight:700">← Mayın Tarlası oyununa dön</a></p>
+    <h1>iPhone Özellik &amp; İzin Denetimi</h1>
+    <p class="subtitle">iPhone'unuzun tüm özelliklerine tek tek erişim isteyelim.</p>
+
+    <div class="summary card">
+      <div class="summary-ring" id="summaryRing" style="--pct:0">
+        <span id="summaryPct">0%</span>
+      </div>
+      <div class="summary-text">
+        <strong id="summaryGranted">0</strong> / <span id="summaryTotal">0</span> özelliğe erişildi
+        <div class="summary-sub" id="summarySub">Henüz hiçbir izin istenmedi</div>
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-block" id="runAllBtn">
+      Hepsini sırayla iste
+    </button>
+  </header>
+
+  <main id="featureList" class="feature-list">
+    <!-- Özellik kartları app.js tarafından oluşturulur -->
+  </main>
+
+  <footer class="app-footer">
+    <p>Bu sayfa, cihazınızın <strong>gerçek</strong> tarayıcı izinlerini ister.
+       Sonuçlar yalnızca bu cihazda kalır, hiçbir yere gönderilmez.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
