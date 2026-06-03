@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#0b1020" />
+  <meta name="description" content="TCS Real Mayın Tarlası — modern, videolu ve görselleri çok güzel bir Minesweeper web uygulaması." />
+  <title>TCS Real • Mayın Tarlası 💣</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="minesweeper.css" />
+</head>
+<body>
+  <!-- Canlı "videolu" animasyonlu arka plan -->
+  <canvas id="bgCanvas" class="bg-canvas" aria-hidden="true"></canvas>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <!-- Partikül / efekt kaplaması (zafer, patlama) -->
+  <canvas id="fxCanvas" class="fx-canvas" aria-hidden="true"></canvas>
+
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-logo">💣</span>
+        <div class="brand-text">
+          <h1>TCS&nbsp;Real <span>Mayın Tarlası</span></h1>
+          <p>Modern • Videolu • Görselleri Çok Güzel</p>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <button class="icon-btn" id="themeBtn" title="Tema değiştir" aria-label="Tema değiştir">🎨</button>
+        <button class="icon-btn" id="soundBtn" title="Ses aç/kapat" aria-label="Ses">🔊</button>
+        <a class="icon-btn" href="iphone.html" title="iPhone İzin Denetimi" aria-label="iPhone">📱</a>
+      </div>
+    </header>
+
+    <!-- Zorluk seçimi -->
+    <nav class="difficulty" id="difficulty" aria-label="Zorluk seviyesi">
+      <button class="diff-btn active" data-level="beginner">
+        <span class="diff-emoji">🌱</span>
+        <span class="diff-name">Kolay</span>
+        <span class="diff-meta">9×9 • 10💣</span>
+      </button>
+      <button class="diff-btn" data-level="intermediate">
+        <span class="diff-emoji">🔥</span>
+        <span class="diff-name">Orta</span>
+        <span class="diff-meta">16×16 • 40💣</span>
+      </button>
+      <button class="diff-btn" data-level="expert">
+        <span class="diff-emoji">💀</span>
+        <span class="diff-name">Uzman</span>
+        <span class="diff-meta">30×16 • 99💣</span>
+      </button>
+      <button class="diff-btn" data-level="custom">
+        <span class="diff-emoji">⚙️</span>
+        <span class="diff-name">Özel</span>
+        <span class="diff-meta">Sen ayarla</span>
+      </button>
+    </nav>
+
+    <!-- Özel ayar paneli -->
+    <form class="custom-panel" id="customPanel" hidden>
+      <label>Genişlik
+        <input type="number" id="cw" min="5" max="40" value="12" />
+      </label>
+      <label>Yükseklik
+        <input type="number" id="ch" min="5" max="30" value="12" />
+      </label>
+      <label>Mayın
+        <input type="number" id="cm" min="1" max="400" value="24" />
+      </label>
+      <button type="submit" class="btn btn-primary">Uygula</button>
+    </form>
+
+    <!-- Skor paneli -->
+    <section class="hud card">
+      <div class="hud-item" title="Kalan mayın">
+        <span class="hud-icon">🚩</span>
+        <span class="hud-value" id="mineCount">000</span>
+      </div>
+
+      <button class="face-btn" id="faceBtn" title="Yeni oyun" aria-label="Yeni oyun">
+        <span id="faceEmoji">🙂</span>
+      </button>
+
+      <div class="hud-item" title="Geçen süre">
+        <span class="hud-icon">⏱️</span>
+        <span class="hud-value" id="timer">000</span>
+      </div>
+    </section>
+
+    <!-- Oyun tahtası -->
+    <main class="board-wrap">
+      <div class="board-frame">
+        <div id="board" class="board" role="grid" aria-label="Mayın tarlası tahtası"></div>
+        <!-- Oyun sonu kaplaması -->
+        <div class="overlay" id="overlay" hidden>
+          <div class="overlay-card">
+            <div class="overlay-emoji" id="overlayEmoji">🎉</div>
+            <h2 id="overlayTitle">Kazandın!</h2>
+            <p id="overlaySub">Harika oynadın.</p>
+            <div class="overlay-stats" id="overlayStats"></div>
+            <button class="btn btn-primary btn-lg" id="overlayBtn">Tekrar Oyna ↻</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Alt araç çubuğu -->
+    <section class="toolbar card">
+      <button class="tool-btn" id="flagModeBtn" title="Bayrak modu (mobil)">
+        <span class="tool-icon">🚩</span>
+        <span class="tool-label">Bayrak Modu</span>
+        <span class="tool-state" id="flagModeState">Kapalı</span>
+      </button>
+      <button class="tool-btn" id="hintBtn" title="İpucu ver">
+        <span class="tool-icon">💡</span>
+        <span class="tool-label">İpucu</span>
+        <span class="tool-state" id="hintState">3 hak</span>
+      </button>
+      <button class="tool-btn" id="newGameBtn" title="Yeni oyun">
+        <span class="tool-icon">🔄</span>
+        <span class="tool-label">Yeni Oyun</span>
+        <span class="tool-state">Başlat</span>
+      </button>
+    </section>
+
+    <!-- En iyi skorlar -->
+    <section class="records card">
+      <h3>🏆 En İyi Süreler</h3>
+      <ul class="record-list" id="recordList"></ul>
+    </section>
+
+    <!-- Nasıl oynanır -->
+    <details class="howto card">
+      <summary>❔ Nasıl Oynanır?</summary>
+      <ul>
+        <li><strong>Sol tık / dokunuş:</strong> Hücreyi aç.</li>
+        <li><strong>Sağ tık / uzun bas:</strong> Bayrak koy/kaldır.</li>
+        <li><strong>Sayılar</strong> komşu 8 hücredeki mayın sayısını gösterir.</li>
+        <li>Bir sayıya <strong>çift tıklarsan</strong>, etrafına yeterince bayrak koyduysan komşular otomatik açılır (chord).</li>
+        <li>Tüm mayınsız hücreleri açarsan <strong>kazanırsın</strong> 🎉</li>
+      </ul>
+    </details>
+
+    <footer class="app-footer">
+      <p>TCS&nbsp;Real ile geliştirildi • Tüm veriler yalnızca bu cihazda saklanır.</p>
+    </footer>
+  </div>
+
+  <script src="minesweeper.js"></script>
+</body>
+</html>
