@@ -1,41 +1,269 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="theme-color" content="#000000" />
-  <title>iPhone Özellik & İzin Denetimi</title>
+  <meta name="theme-color" content="#8a9a5b" />
+  <meta name="description" content="Hydraulic Tank — custom-made hydraulic oil tanks. Precision-welded diesel, mobile and HPU reservoirs, finished with a flawless powder-coat." />
+  <title>Hydraulic Tank — Custom Hydraulic Oil Tanks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="app-header">
-    <h1>iPhone Özellik &amp; İzin Denetimi</h1>
-    <p class="subtitle">iPhone'unuzun tüm özelliklerine tek tek erişim isteyelim.</p>
+  <!-- ===================== NAV ===================== -->
+  <header class="nav" id="nav">
+    <div class="nav-inner container">
+      <a class="brand" href="index.html" aria-label="Hydraulic Tank home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" width="26" height="26"><path d="M6 9h20a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V11a2 2 0 0 1 2-2Zm0 6h20M11 15v10M21 15v10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </span>
+        <span class="brand-text">Hydraulic<span class="brand-thin">Tank</span></span>
+      </a>
 
-    <div class="summary card">
-      <div class="summary-ring" id="summaryRing" style="--pct:0">
-        <span id="summaryPct">0%</span>
-      </div>
-      <div class="summary-text">
-        <strong id="summaryGranted">0</strong> / <span id="summaryTotal">0</span> özelliğe erişildi
-        <div class="summary-sub" id="summarySub">Henüz hiçbir izin istenmedi</div>
-      </div>
+      <nav class="nav-links" id="navLinks" aria-label="Primary">
+        <a href="index.html#products">Tanks</a>
+        <a href="index.html#process">Process</a>
+        <a href="index.html#gallery">Gallery</a>
+        <a href="index.html#contact">Contact</a>
+        <a class="nav-cta" href="index.html#contact">Request a Quote</a>
+      </nav>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-
-    <button class="btn btn-primary btn-block" id="runAllBtn">
-      Hepsini sırayla iste
-    </button>
   </header>
 
-  <main id="featureList" class="feature-list">
-    <!-- Özellik kartları app.js tarafından oluşturulur -->
-  </main>
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+    <div class="hero-media" data-photo="hero" aria-hidden="true">
+      <img
+        src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=2100&q=80"
+        alt="" loading="eager" onerror="this.style.display='none'" />
+      <div class="hero-scrim"></div>
+    </div>
+    <div class="hero-content container">
+      <p class="eyebrow">Custom-made · Precision-welded</p>
+      <h1>Reservoirs built<br>to hold the pressure.</h1>
+      <p class="hero-sub">
+        Hydraulic oil tanks fabricated one at a time — clean welds, tight tolerances
+        and a powder-coat finish worth showing off. Diesel, mobile and HPU builds,
+        made to your drawings.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="index.html#products">Explore the tanks</a>
+        <a class="btn btn-ghost" href="index.html#contact">Talk to a fabricator</a>
+      </div>
+      <ul class="hero-stats">
+        <li><strong>1,200+</strong><span>tanks delivered</span></li>
+        <li><strong>±0.5 mm</strong><span>weld tolerance</span></li>
+        <li><strong>15 yr</strong><span>on the floor</span></li>
+      </ul>
+    </div>
+  </section>
 
-  <footer class="app-footer">
-    <p>Bu sayfa, cihazınızın <strong>gerçek</strong> tarayıcı izinlerini ister.
-       Sonuçlar yalnızca bu cihazda kalır, hiçbir yere gönderilmez.</p>
+  <!-- ===================== TRUST STRIP ===================== -->
+  <section class="marquee" aria-label="Standards we build to">
+    <div class="marquee-track">
+      <span>ISO 9001</span><span>·</span><span>CE Marked</span><span>·</span>
+      <span>Powder-Coat Certified</span><span>·</span><span>Pressure-Tested</span><span>·</span>
+      <span>Baffled &amp; Filtered</span><span>·</span><span>Custom CAD</span><span>·</span>
+      <span>ISO 9001</span><span>·</span><span>CE Marked</span><span>·</span>
+      <span>Powder-Coat Certified</span><span>·</span><span>Pressure-Tested</span><span>·</span>
+      <span>Baffled &amp; Filtered</span><span>·</span><span>Custom CAD</span><span>·</span>
+    </div>
+  </section>
+
+  <!-- ===================== PRODUCTS ===================== -->
+  <section class="section" id="products">
+    <div class="container">
+      <header class="section-head">
+        <p class="eyebrow">The range</p>
+        <h2>Three tanks. Endless configurations.</h2>
+        <p class="section-lead">
+          Every build starts as a blank sheet of steel and your spec. Pick a family
+          to see capacities, finishes and the detail pages.
+        </p>
+      </header>
+
+      <div class="card-grid">
+        <!-- Diesel -->
+        <a class="product-card" href="diesel.html">
+          <div class="card-media" data-photo="diesel">
+            <img src="https://images.unsplash.com/photo-1565793298595-6a879b1d9492?auto=format&fit=crop&w=1200&q=80" alt="Welded diesel tank on the shop floor" loading="lazy" onerror="this.style.display='none'" />
+          </div>
+          <span class="card-book">Book Now →</span>
+          <div class="card-body">
+            <span class="card-tag">Diesel Tanks</span>
+            <h3>Diesel Storage Tanks</h3>
+            <p>Baffled steel reservoirs for gensets and refuelling rigs. 200 L to 10,000 L, bunded options available.</p>
+            <span class="card-link">View details →</span>
+          </div>
+        </a>
+
+        <!-- Mobile -->
+        <a class="product-card" href="mobile.html">
+          <div class="card-media" data-photo="mobile">
+            <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1200&q=80" alt="Mobile hydraulic tank welded onto a chassis" loading="lazy" onerror="this.style.display='none'" />
+          </div>
+          <span class="card-book">Book Now →</span>
+          <div class="card-body">
+            <span class="card-tag">Mobile Tanks</span>
+            <h3>Mobile Hydraulic Tanks</h3>
+            <p>Vibration-rated, saddle-mounted tanks for trucks, tippers and mobile plant. Light, tough, road-ready.</p>
+            <span class="card-link">View details →</span>
+          </div>
+        </a>
+
+        <!-- HPU -->
+        <a class="product-card" href="hpu.html">
+          <div class="card-media" data-photo="hpu">
+            <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80" alt="Hydraulic power unit reservoir" loading="lazy" onerror="this.style.display='none'" />
+          </div>
+          <span class="card-book">Book Now →</span>
+          <div class="card-body">
+            <span class="card-tag">HPU Tanks</span>
+            <h3>HPU Power-Unit Tanks</h3>
+            <p>L-shaped and overhead reservoirs sized to your pump and cooling load. Machined ports, drop-in ready.</p>
+            <span class="card-link">View details →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROCESS / SPLIT ===================== -->
+  <section class="section split" id="process">
+    <div class="container split-inner">
+      <div class="split-media" data-photo="weld">
+        <img src="https://images.unsplash.com/photo-1517420704952-d9f39e95b43e?auto=format&fit=crop&w=1400&q=80" alt="Sparks flying from a MIG welder" loading="lazy" onerror="this.style.display='none'" />
+      </div>
+      <div class="split-text">
+        <p class="eyebrow">From arc to finish</p>
+        <h2>Welded by hand. Finished like furniture.</h2>
+        <p>
+          Our welders lay every seam by eye and every tank is leak-tested before it
+          leaves the bay. Then it moves to the paint line for a chip-resistant
+          powder-coat in the colour you choose.
+        </p>
+        <ul class="steps">
+          <li><span>01</span><div><strong>Design &amp; CAD</strong><p>Your drawing or ours — baffles, ports and mounts modelled first.</p></div></li>
+          <li><span>02</span><div><strong>Cut &amp; weld</strong><p>Laser-cut plate, jig-assembled and full-seam MIG welded.</p></div></li>
+          <li><span>03</span><div><strong>Test &amp; coat</strong><p>Pressure &amp; leak test, then a flawless powder-coat finish.</p></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== GALLERY (horizontal scroll) ===================== -->
+  <section class="section gallery-section" id="gallery">
+    <div class="container">
+      <header class="section-head">
+        <p class="eyebrow">Off the floor</p>
+        <h2>Build Inspiration</h2>
+        <p class="section-lead">A scroll through recent jobs — fresh welds, wet paint and finished reservoirs.</p>
+      </header>
+    </div>
+
+    <div class="polaroid-rail" id="polaroidRail" tabindex="0" aria-label="Scrollable project gallery">
+      <figure class="polaroid" data-photo="g1">
+        <div class="polaroid-photo"><img src="https://images.unsplash.com/photo-1516937941344-00b4e0337589?auto=format&fit=crop&w=800&q=80" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+        <figcaption>Baffle plates, tacked</figcaption>
+      </figure>
+      <figure class="polaroid" data-photo="g2">
+        <div class="polaroid-photo"><img src="https://images.unsplash.com/photo-1533630018502-fb8b1a1c4a0f?auto=format&fit=crop&w=800&q=80" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+        <figcaption>Sage powder-coat</figcaption>
+      </figure>
+      <figure class="polaroid" data-photo="g3">
+        <div class="polaroid-photo"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+        <figcaption>Machined port face</figcaption>
+      </figure>
+      <figure class="polaroid" data-photo="g4">
+        <div class="polaroid-photo"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+        <figcaption>HPU on the bench</figcaption>
+      </figure>
+      <figure class="polaroid" data-photo="g5">
+        <div class="polaroid-photo"><img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=800&q=80" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+        <figcaption>Ready to ship</figcaption>
+      </figure>
+      <figure class="polaroid" data-photo="g6">
+        <div class="polaroid-photo"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+        <figcaption>Sight-glass detail</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===================== CTA ===================== -->
+  <section class="section" id="contact">
+    <div class="container cta-card">
+      <div class="cta-text">
+        <p class="eyebrow">Start a build</p>
+        <h2>Send us your spec — we'll send back a quote.</h2>
+        <p>Drawings, a napkin sketch or just a capacity and a pump. Tell us what you
+           need and a fabricator will get back within one working day.</p>
+      </div>
+      <form class="cta-form" id="quoteForm" novalidate>
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div class="field">
+          <label for="type">Tank type</label>
+          <select id="type" name="type">
+            <option>Diesel Tank</option>
+            <option>Mobile Tank</option>
+            <option>HPU Tank</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="msg">Details</label>
+          <textarea id="msg" name="msg" rows="3" placeholder="Capacity, mounting, ports, finish…"></textarea>
+        </div>
+        <button class="btn btn-primary btn-block" type="submit">Book Now</button>
+        <p class="form-note" id="formNote" role="status"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="brand-text">Hydraulic<span class="brand-thin">Tank</span></span>
+        <p>Custom hydraulic oil tanks, welded and finished under one roof.</p>
+      </div>
+      <div class="footer-cols">
+        <div>
+          <h4>Tanks</h4>
+          <a href="diesel.html">Diesel Tanks</a>
+          <a href="mobile.html">Mobile Tanks</a>
+          <a href="hpu.html">HPU Tanks</a>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <a href="index.html#process">Our process</a>
+          <a href="index.html#gallery">Gallery</a>
+          <a href="index.html#contact">Get a quote</a>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <a href="mailto:hello@hydraulictank.co">hello@hydraulictank.co</a>
+          <a href="tel:+10000000000">+1 (000) 000-0000</a>
+          <span>Mon–Fri · 7am–5pm</span>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-base">
+      <span>© <span id="year">2026</span> Hydraulic Tank. All rights reserved.</span>
+      <span>Precision-welded in-house.</span>
+    </div>
   </footer>
 
   <script src="app.js"></script>

@@ -1,8 +1,8 @@
 {
-  "name": "iphone-feature-audit",
+  "name": "hydraulic-tank-website",
   "version": "1.0.0",
   "private": true,
-  "description": "iPhone ozellik ve izin denetimi web uygulamasi",
+  "description": "Hydraulic Tank — custom hydraulic oil tank manufacturer website",
   "scripts": {
     "start": "node server.js"
   },
