@@ -1,7 +1,7 @@
 "use strict";
 
 /* ============================================================
-   Hydraulic Tank — light, simple interactions only
+   Wildnest — light, simple interactions only
    ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* --- Quote form: friendly client-side handling (no backend) --- */
+  /* --- Booking form: friendly client-side handling (no backend) --- */
   const form = document.getElementById("quoteForm");
   const note = document.getElementById("formNote");
   if (form) {
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (note) note.textContent = "Please add your name and email so we can reply.";
         return;
       }
-      if (note) note.textContent = `Thanks, ${name.value.trim().split(" ")[0]} — a fabricator will be in touch within one working day.`;
+      if (note) note.textContent = `Thanks, ${name.value.trim().split(" ")[0]} — we'll confirm your spot by the water within a day.`;
       form.reset();
     });
   }

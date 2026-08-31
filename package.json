@@ -1,8 +1,8 @@
 {
-  "name": "hydraulic-tank-website",
+  "name": "wildnest-website",
   "version": "1.0.0",
   "private": true,
-  "description": "Hydraulic Tank — custom hydraulic oil tank manufacturer website",
+  "description": "Wildnest — lakeside camping and glamping retreat website",
   "scripts": {
     "start": "node server.js"
   },
